@@ -280,8 +280,14 @@ func (e *Escpos) EAN8(code string) (int, error) {
 	return e.WriteRaw(append([]byte{gs, 'k', 3}, byteCode...))
 }
 
+// Prints a CODE39 Barcode. code can only be alphanumerical characters
+func (e *Escpos) CODE39(code string) (int, error) {
+	byteCode := append([]byte(code), 0)
+	return e.WriteRaw(append([]byte{gs, 0x6b, 0x04}, byteCode...))
+}
+
 // TODO:
-// CODE39, ITF, CODABAR
+// ITF, CODABAR
 
 // Prints a QR Code.
 // code specifies the data to be printed
